@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NV] = LAYOUT(
-    TO(_NV),   KC_HOME,  KC_PGUP,   XXXXXXX,
+    TO(_CS),   KC_HOME,  KC_PGUP,   XXXXXXX,
     KC_DEL,   KC_END,   KC_PGDN,
     XXXXXXX,  XXXXXXX,  KC_VOLU,   XXXXXXX,
     XXXXXXX,  KC_UP,    KC_VOLD,
