@@ -32,6 +32,7 @@ enum layers {
     _VOC, // TeamSpeak Binds, CSGO Chat Macros
     _FN, // RGB Functions
     _RPL, // CSGO Replays
+    _SKBX, // Skybox.gg
     _MED, // Media Keys
     _YT // Youtube
 };
@@ -46,6 +47,8 @@ enum custom_keycodes {
     KC_NOCOMMENT_de,
     KC_HOBBY_de,
     KC_DONTFACE_de,
+    KC_SOLD_de,
+    KC_TIME_de 
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -63,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(_FN),  TG(_FN),  TG(_RPL),   TG(_MED),
     KC_THROW_en,   KC_DONTTHROW_en ,   KC_ZZZ,
     KC_NOCOMMENT_de,  KC_HOBBY_de,  KC_DONTFACE_de,   KC_F24,
-    KC_F16,  KC_F17,    KC_F18,
+    KC_SOLD_de,  KC_TIME_de,    KC_RAGEQUIT,
     KC_F13,  KC_F14,  KC_F15,   KC_F23
   ),
 
@@ -77,11 +80,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_RPL] = LAYOUT(
-    TO(_MED),  TG(_FN),  TG(_RPL),   TG(_MED),
+    TO(_SKBX),  TG(_FN),  TG(_RPL),   TG(_MED),
     XXXXXXX,  RGB_HUI,  XXXXXXX,
     KC_RAGEQUIT,  RGB_SAI,  XXXXXXX,   XXXXXXX,
     RGB_VAD,  RGB_VAI,  XXXXXXX,
     QK_BOOT,    XXXXXXX,  XXXXXXX,   XXXXXXX
+  ),
+
+  [_SKBX] = LAYOUT(
+    TO(_MED),  TG(_FN),  TG(_RPL),   TG(_MED),
+    KC_X,  KC_G,  KC_PGUP,
+    LCTL(KC_B),  KC_SPC,  LCTL(KC_N),   LCTL(KC_O),
+    LCTL(KC_1),  LCTL(KC_2),  KC_PGDN,
+    LCTL(KC_3),    LCTL(KC_4),  LCTL(KC_5),   LCTL(KC_F)
   ),
 
   [_MED] = LAYOUT(
@@ -166,12 +177,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
       case KC_DONTFACE_de:
         if (record->event.pressed) {
-            SEND_STRING("u" SS_DELAY(50) "Jetyt B I T T E   N I C H T   dumm reinfacen!\n");
+            SEND_STRING("u" SS_DELAY(50) "Jetyt B I T T E     N I C H T   dumm reinfacen!\n");
+        } else {
+            // when keycode KC_DBL0 is released
+        }
+        break;
+      case KC_SOLD_de:
+        if (record->event.pressed) {
+            SEND_STRING("u" SS_DELAY(50) "Verkauft\n");
+        } else {
+            // when keycode KC_DBL0 is released
+        }
+        break;
+      case KC_TIME_de:
+        if (record->event.pressed) {
+            SEND_STRING("u" SS_DELAY(50) "Das dauert schon wieder alles viel zu lange\n");
         } else {
             // when keycode KC_DBL0 is released
         }
         break;
   }
+  
   return true;
 };
 
@@ -180,6 +206,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 const rgblight_segment_t PROGMEM base_light[] = RGBLIGHT_LAYER_SEGMENTS(
   {0, 9, HSV_BLUE}
+);
+const rgblight_segment_t PROGMEM rgb_light[] = RGBLIGHT_LAYER_SEGMENTS(
+  {0, 3, HSV_RED},
+{3, 3, HSV_GREEN},
+{6, 3, HSV_BLUE}
 );
 
 const rgblight_segment_t PROGMEM voc_light[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -191,12 +222,17 @@ const rgblight_segment_t PROGMEM med_light[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM yt_light[] = RGBLIGHT_LAYER_SEGMENTS(
   {0, 9, HSV_RED}
 );
+const rgblight_segment_t PROGMEM skbx_light[] = RGBLIGHT_LAYER_SEGMENTS(
+  {0, 9, HSV_PURPLE}
+);
 
 const rgblight_segment_t* const PROGMEM rgb_layer[] = RGBLIGHT_LAYERS_LIST(
   base_light,
   voc_light,
   med_light,
-  yt_light
+  yt_light,
+  skbx_light,
+  rgb_light
 );
 
 
@@ -215,6 +251,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   rgblight_set_layer_state(1, layer_state_cmp(state, _VOC));
   rgblight_set_layer_state(2, layer_state_cmp(state, _MED));
   rgblight_set_layer_state(3, layer_state_cmp(state, _YT));
+  rgblight_set_layer_state(4, layer_state_cmp(state, _SKBX));
+  rgblight_set_layer_state(5, layer_state_cmp(state, _FN));
   return state;
 }
 
@@ -237,6 +275,9 @@ bool oled_task_user(void) {
       break;
     case _RPL:
       oled_write_ln_P(PSTR(" RPL"), false);
+      break;
+    case _SKBX:
+      oled_write_ln_P(PSTR("SKBX"), false);
       break;
     case _MED:
       oled_write_ln_P(PSTR(" MED"), false);
