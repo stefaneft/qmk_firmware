@@ -73,11 +73,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-------------------'
  */
   [_NV] = LAYOUT(
-    KC_INS,   KC_HOME,  KC_PGUP,   TG(_NV),
-    KC_DEL,   KC_END,   KC_PGDN,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,
-    XXXXXXX,  KC_UP,    XXXXXXX,
-    KC_LEFT,  KC_DOWN,  KC_RGHT,   XXXXXXX
+    TG(_NV),   KC_F10,  SGUI(KC_S),   KC_MPLY,
+    KC_F22,   KC_F23,   KC_F24,
+    KC_F19,  KC_F20,  KC_F21,   KC_F12,
+    KC_F16,  KC_F17,    KC_F18,
+    KC_F13,  KC_F14,  KC_F15,   KC_F9
   ),
 
 /* Keymap _FN: RGB Function Layer
@@ -130,7 +130,7 @@ bool oled_task_user(void) {
       oled_write_ln_P(PSTR(" BAS"), false);
       break;
     case _NV:
-      oled_write_ln_P(PSTR(" NAV"), false);
+      oled_write_ln_P(PSTR(" VOC"), false);
       break;
     case _FN:
       oled_write_ln_P(PSTR(" RGB"), false);
