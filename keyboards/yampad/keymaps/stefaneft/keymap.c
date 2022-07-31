@@ -53,28 +53,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-------------------'
  */
   [_BL] = LAYOUT(
-    TG(_NV),  KC_PSLS,  KC_PAST,   LT(_FN, KC_PMNS),
+    TO(_NV),  KC_PSLS,  KC_PAST,   LT(_FN, KC_PMNS),
     KC_P7,    KC_P8,    KC_P9,
     KC_P4,    KC_P5,    KC_P6,     KC_PPLS,
     KC_P1,    KC_P2,    KC_P3,
     KC_P0,    KC_MPLY,  KC_PDOT,   KC_PENT
   ),
 
-/* Keymap _NV: Navigation layer
- * ,-------------------.
- * |INS |HOME|PGUP|    |
- * |----|----|----|----|
- * |DEL |END |PGDN|    |
- * |----|----|----|    |
- * |    |    |    |    |
- * |----|----|----|----|
- * |    | UP |    |    |
- * |----|----|----|    |
- * |LEFT|DOWN|RIGH|    |
- * `-------------------'
- */
   [_NV] = LAYOUT(
-    KC_INS,   KC_HOME,  KC_PGUP,   TG(_NV),
+    TO(_NV),   KC_HOME,  KC_PGUP,   XXXXXXX,
     KC_DEL,   KC_END,   KC_PGDN,
     XXXXXXX,  XXXXXXX,  KC_VOLU,   XXXXXXX,
     XXXXXXX,  KC_UP,    KC_VOLD,
@@ -102,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     QK_BOOT,    XXXXXXX,  XXXXXXX,   XXXXXXX
   ),
   [_CS] = LAYOUT(
-    RGB_MOD,  RGB_M_P,  RGB_TOG,   _______,
+    TO(_BL),  RGB_M_P,  RGB_TOG,   _______,
     RGB_HUD,  RGB_HUI,  XXXXXXX,
     RGB_SAD,  RGB_SAI,  XXXXXXX,   XXXXXXX,
     RGB_VAD,  RGB_VAI,  XXXXXXX,
