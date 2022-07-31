@@ -50,6 +50,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_DI_PIN F4
 #define RGBLED_NUM 9
 #define RGBLIGHT_ANIMATIONS
+/* Enable RGBLIGHT Layers and save brightness */
+#define RGBLIGHT_LAYERS
+#define RGBLIGHT_LAYERS_RETAIN_VAL
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 2
