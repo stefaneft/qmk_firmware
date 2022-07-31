@@ -182,6 +182,9 @@ bool oled_task_user(void) {
     case _FN:
       oled_write_ln_P(PSTR(" RGB"), false);
       break;
+    case _CS:
+      oled_write_ln_P(PSTR(" CSGO"), false);
+      break;
     default:
       // Or use the write_ln shortcut over adding '\n' to the end of your string
       oled_write_ln_P(PSTR(" UND"), false);
